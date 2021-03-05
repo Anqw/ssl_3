@@ -1,0 +1,665 @@
+[03/05 13:01:07] fs3c INFO: Rank of current process: 0. World size: 2
+[03/05 13:01:07] fs3c INFO: Command line arguments: Namespace(config_file='configs/PascalVOC-detection/split1/faster_rcnn_R_101_FPN_ft_all1_10shot.yaml', dist_url='tcp://127.0.0.1:52117', end_iter=-1, eval_all=False, eval_during_train=False, eval_iter=-1, eval_only=False, machine_rank=0, num_gpus=2, num_machines=1, opts=[], resume=False, start_iter=-1)
+[03/05 13:01:07] fs3c INFO: Contents of args.config_file=configs/PascalVOC-detection/split1/faster_rcnn_R_101_FPN_ft_all1_10shot.yaml:
+_BASE_: "../../Base-RCNN-FPN.yaml"
+MODEL:
+  WEIGHTS: "checkpoints/voc/faster_rcnn/faster_rcnn_R_101_FPN_base1/model_reset_surgery.pth"
+  BASE: "checkpoints/voc/faster_rcnn/faster_rcnn_R_101_FPN_base1/model_final.pth"
+  MASK_ON: False
+  RESNETS:
+    DEPTH: 101
+  ROI_HEADS:
+    NUM_CLASSES: 20
+    OUTPUT_LAYER: "CosineSimOutputLayers"
+    FREEZE_FEAT: False
+  BACKBONE:
+    FREEZE: False
+  PROPOSAL_GENERATOR:
+    FREEZE: False
+INPUT:
+  MIN_SIZE_TRAIN: (480, 512, 544, 576, 608, 640, 672, 704, 736, 768, 800)
+  MIN_SIZE_TEST: 800
+DATASETS:
+  TRAIN: ('voc_2007_trainval_all1_10shot',)
+  TEST: ('voc_2007_test_all1',)
+  SSL: ('voc_2007_trainval_all1_10shot',)
+SOLVER:
+  IMS_PER_BATCH: 16
+  BASE_LR: 0.02
+  STEPS: (450, 850 )
+  MAX_ITER: 1000
+  CHECKPOINT_PERIOD: 100
+  #WARMUP_ITERS: 10
+OUTPUT_DIR: "checkpoints/voc/faster_rcnn/faster_rcnn_R_101_FPN_ft_normalized_all1_10shot_randnovel"
+SSL: True
+ROT: True
+JIG: True
+[03/05 13:01:07] fs3c INFO: Full config saved to /home/xd1/ssl/checkpoints/voc/faster_rcnn/faster_rcnn_R_101_FPN_ft_normalized_all1_10shot_randnovel/config.yaml
+[03/05 13:01:07] fs3c.utils.env INFO: Using a generated random seed 7683470
+[03/05 13:01:09] fs3c.data.build INFO: Removed 0 images with no usable annotations. 200 images left.
+[03/05 13:01:09] fs3c.data.build INFO: Distribution of training instances among all 20 categories:
+[36m|  category  | #instances   |  category   | #instances   |  category   | #instances   |
+|:----------:|:-------------|:-----------:|:-------------|:-----------:|:-------------|
+| aeroplane  | 10           |   bicycle   | 10           |    boat     | 10           |
+|   bottle   | 10           |     car     | 10           |     cat     | 10           |
+|   chair    | 10           | diningtable | 10           |     dog     | 10           |
+|   horse    | 10           |   person    | 10           | pottedplant | 10           |
+|   sheep    | 10           |    train    | 10           |  tvmonitor  | 10           |
+|    bird    | 10           |     bus     | 10           |     cow     | 10           |
+| motorbike  | 10           |    sofa     | 10           |             |              |
+|   total    | 200          |             |              |             |              |[0m
+[03/05 13:01:09] fs3c.data.detection_utils INFO: TransformGens used in training: [ResizeShortestEdge(short_edge_length=(480, 512, 544, 576, 608, 640, 672, 704, 736, 768, 800), max_size=1333, sample_style='choice'), RandomFlip()]
+[03/05 13:01:09] fs3c.data.build INFO: Using training sampler TrainingSampler
+[03/05 13:01:09] fs3c.data.build INFO: Removed 0 images with no usable annotations. 200 images left.
+[03/05 13:01:09] fs3c.data.detection_utils INFO: TransformGens used in training: [ResizeShortestEdge(short_edge_length=(480, 512, 544, 576, 608, 640, 672, 704, 736, 768, 800), max_size=1333, sample_style='choice'), RandomFlip()]
+[03/05 13:01:09] fs3c.data.build INFO: Using training sampler TrainingSampler
+[03/05 13:09:04] fs3c INFO: Rank of current process: 0. World size: 2
+[03/05 13:09:04] fs3c INFO: Command line arguments: Namespace(config_file='configs/PascalVOC-detection/split1/faster_rcnn_R_101_FPN_ft_all1_10shot.yaml', dist_url='tcp://127.0.0.1:52117', end_iter=-1, eval_all=False, eval_during_train=False, eval_iter=-1, eval_only=False, machine_rank=0, num_gpus=2, num_machines=1, opts=[], resume=False, start_iter=-1)
+[03/05 13:09:04] fs3c INFO: Contents of args.config_file=configs/PascalVOC-detection/split1/faster_rcnn_R_101_FPN_ft_all1_10shot.yaml:
+_BASE_: "../../Base-RCNN-FPN.yaml"
+MODEL:
+  WEIGHTS: "checkpoints/voc/faster_rcnn/faster_rcnn_R_101_FPN_base1/model_reset_surgery.pth"
+  BASE: "checkpoints/voc/faster_rcnn/faster_rcnn_R_101_FPN_base1/model_final.pth"
+  MASK_ON: False
+  RESNETS:
+    DEPTH: 101
+  ROI_HEADS:
+    NUM_CLASSES: 20
+    OUTPUT_LAYER: "CosineSimOutputLayers"
+    FREEZE_FEAT: False
+  BACKBONE:
+    FREEZE: False
+  PROPOSAL_GENERATOR:
+    FREEZE: False
+INPUT:
+  MIN_SIZE_TRAIN: (480, 512, 544, 576, 608, 640, 672, 704, 736, 768, 800)
+  MIN_SIZE_TEST: 800
+DATASETS:
+  TRAIN: ('voc_2007_trainval_all1_10shot',)
+  TEST: ('voc_2007_test_all1',)
+  SSL: ('voc_2007_trainval_all1_10shot',)
+SOLVER:
+  IMS_PER_BATCH: 16
+  BASE_LR: 0.02
+  STEPS: (450, 850 )
+  MAX_ITER: 1000
+  CHECKPOINT_PERIOD: 100
+  #WARMUP_ITERS: 10
+OUTPUT_DIR: "checkpoints/voc/faster_rcnn/faster_rcnn_R_101_FPN_ft_normalized_all1_10shot_randnovel"
+SSL: True
+ROT: True
+JIG: True
+[03/05 13:09:05] fs3c INFO: Full config saved to /home/xd1/ssl/checkpoints/voc/faster_rcnn/faster_rcnn_R_101_FPN_ft_normalized_all1_10shot_randnovel/config.yaml
+[03/05 13:09:05] fs3c.utils.env INFO: Using a generated random seed 5144537
+[03/05 13:09:06] fs3c.data.build INFO: Removed 0 images with no usable annotations. 200 images left.
+[03/05 13:09:06] fs3c.data.build INFO: Distribution of training instances among all 20 categories:
+[36m|  category  | #instances   |  category   | #instances   |  category   | #instances   |
+|:----------:|:-------------|:-----------:|:-------------|:-----------:|:-------------|
+| aeroplane  | 10           |   bicycle   | 10           |    boat     | 10           |
+|   bottle   | 10           |     car     | 10           |     cat     | 10           |
+|   chair    | 10           | diningtable | 10           |     dog     | 10           |
+|   horse    | 10           |   person    | 10           | pottedplant | 10           |
+|   sheep    | 10           |    train    | 10           |  tvmonitor  | 10           |
+|    bird    | 10           |     bus     | 10           |     cow     | 10           |
+| motorbike  | 10           |    sofa     | 10           |             |              |
+|   total    | 200          |             |              |             |              |[0m
+[03/05 13:09:06] fs3c.data.detection_utils INFO: TransformGens used in training: [ResizeShortestEdge(short_edge_length=(480, 512, 544, 576, 608, 640, 672, 704, 736, 768, 800), max_size=1333, sample_style='choice'), RandomFlip()]
+[03/05 13:09:06] fs3c.data.build INFO: Using training sampler TrainingSampler
+[03/05 13:09:06] fs3c.data.build INFO: Removed 0 images with no usable annotations. 200 images left.
+[03/05 13:09:07] fs3c.data.detection_utils INFO: TransformGens used in training: [ResizeShortestEdge(short_edge_length=(480, 512, 544, 576, 608, 640, 672, 704, 736, 768, 800), max_size=1333, sample_style='choice'), RandomFlip()]
+[03/05 13:09:07] fs3c.data.build INFO: Using training sampler TrainingSampler
+[03/05 13:15:10] fs3c INFO: Rank of current process: 0. World size: 2
+[03/05 13:15:10] fs3c INFO: Command line arguments: Namespace(config_file='configs/PascalVOC-detection/split1/faster_rcnn_R_101_FPN_ft_all1_10shot.yaml', dist_url='tcp://127.0.0.1:52117', end_iter=-1, eval_all=False, eval_during_train=False, eval_iter=-1, eval_only=False, machine_rank=0, num_gpus=2, num_machines=1, opts=[], resume=False, start_iter=-1)
+[03/05 13:15:10] fs3c INFO: Contents of args.config_file=configs/PascalVOC-detection/split1/faster_rcnn_R_101_FPN_ft_all1_10shot.yaml:
+_BASE_: "../../Base-RCNN-FPN.yaml"
+MODEL:
+  WEIGHTS: "checkpoints/voc/faster_rcnn/faster_rcnn_R_101_FPN_base1/model_reset_surgery.pth"
+  BASE: "checkpoints/voc/faster_rcnn/faster_rcnn_R_101_FPN_base1/model_final.pth"
+  MASK_ON: False
+  RESNETS:
+    DEPTH: 101
+  ROI_HEADS:
+    NUM_CLASSES: 20
+    OUTPUT_LAYER: "CosineSimOutputLayers"
+    FREEZE_FEAT: False
+  BACKBONE:
+    FREEZE: False
+  PROPOSAL_GENERATOR:
+    FREEZE: False
+INPUT:
+  MIN_SIZE_TRAIN: (480, 512, 544, 576, 608, 640, 672, 704, 736, 768, 800)
+  MIN_SIZE_TEST: 800
+DATASETS:
+  TRAIN: ('voc_2007_trainval_all1_10shot',)
+  TEST: ('voc_2007_test_all1',)
+  SSL: ('voc_2007_trainval_all1_10shot',)
+SOLVER:
+  IMS_PER_BATCH: 16
+  BASE_LR: 0.02
+  STEPS: (450, 850 )
+  MAX_ITER: 1000
+  CHECKPOINT_PERIOD: 100
+  #WARMUP_ITERS: 10
+OUTPUT_DIR: "checkpoints/voc/faster_rcnn/faster_rcnn_R_101_FPN_ft_normalized_all1_10shot_randnovel"
+SSL: True
+ROT: True
+JIG: True
+[03/05 13:15:10] fs3c INFO: Full config saved to /home/xd1/ssl/checkpoints/voc/faster_rcnn/faster_rcnn_R_101_FPN_ft_normalized_all1_10shot_randnovel/config.yaml
+[03/05 13:15:10] fs3c.utils.env INFO: Using a generated random seed 10170584
+[03/05 13:15:11] fs3c.data.build INFO: Removed 0 images with no usable annotations. 200 images left.
+[03/05 13:15:11] fs3c.data.build INFO: Distribution of training instances among all 20 categories:
+[36m|  category  | #instances   |  category   | #instances   |  category   | #instances   |
+|:----------:|:-------------|:-----------:|:-------------|:-----------:|:-------------|
+| aeroplane  | 10           |   bicycle   | 10           |    boat     | 10           |
+|   bottle   | 10           |     car     | 10           |     cat     | 10           |
+|   chair    | 10           | diningtable | 10           |     dog     | 10           |
+|   horse    | 10           |   person    | 10           | pottedplant | 10           |
+|   sheep    | 10           |    train    | 10           |  tvmonitor  | 10           |
+|    bird    | 10           |     bus     | 10           |     cow     | 10           |
+| motorbike  | 10           |    sofa     | 10           |             |              |
+|   total    | 200          |             |              |             |              |[0m
+[03/05 13:15:11] fs3c.data.detection_utils INFO: TransformGens used in training: [ResizeShortestEdge(short_edge_length=(480, 512, 544, 576, 608, 640, 672, 704, 736, 768, 800), max_size=1333, sample_style='choice'), RandomFlip()]
+[03/05 13:15:11] fs3c.data.build INFO: Using training sampler TrainingSampler
+[03/05 13:15:11] fs3c.data.build INFO: Removed 0 images with no usable annotations. 200 images left.
+[03/05 13:15:11] fs3c.data.detection_utils INFO: TransformGens used in training: [ResizeShortestEdge(short_edge_length=(480, 512, 544, 576, 608, 640, 672, 704, 736, 768, 800), max_size=1333, sample_style='choice'), RandomFlip()]
+[03/05 13:15:11] fs3c.data.build INFO: Using training sampler TrainingSampler
+[03/05 13:18:54] fs3c INFO: Rank of current process: 0. World size: 2
+[03/05 13:18:54] fs3c INFO: Command line arguments: Namespace(config_file='configs/PascalVOC-detection/split1/faster_rcnn_R_101_FPN_ft_all1_10shot.yaml', dist_url='tcp://127.0.0.1:52117', end_iter=-1, eval_all=False, eval_during_train=False, eval_iter=-1, eval_only=False, machine_rank=0, num_gpus=2, num_machines=1, opts=[], resume=False, start_iter=-1)
+[03/05 13:18:54] fs3c INFO: Contents of args.config_file=configs/PascalVOC-detection/split1/faster_rcnn_R_101_FPN_ft_all1_10shot.yaml:
+_BASE_: "../../Base-RCNN-FPN.yaml"
+MODEL:
+  WEIGHTS: "checkpoints/voc/faster_rcnn/faster_rcnn_R_101_FPN_base1/model_reset_surgery.pth"
+  BASE: "checkpoints/voc/faster_rcnn/faster_rcnn_R_101_FPN_base1/model_final.pth"
+  MASK_ON: False
+  RESNETS:
+    DEPTH: 101
+  ROI_HEADS:
+    NUM_CLASSES: 20
+    OUTPUT_LAYER: "CosineSimOutputLayers"
+    FREEZE_FEAT: False
+  BACKBONE:
+    FREEZE: False
+  PROPOSAL_GENERATOR:
+    FREEZE: False
+INPUT:
+  MIN_SIZE_TRAIN: (480, 512, 544, 576, 608, 640, 672, 704, 736, 768, 800)
+  MIN_SIZE_TEST: 800
+DATASETS:
+  TRAIN: ('voc_2007_trainval_all1_10shot',)
+  TEST: ('voc_2007_test_all1',)
+  SSL: ('voc_2007_trainval_all1_10shot',)
+SOLVER:
+  IMS_PER_BATCH: 16
+  BASE_LR: 0.02
+  STEPS: (450, 850 )
+  MAX_ITER: 1000
+  CHECKPOINT_PERIOD: 100
+  #WARMUP_ITERS: 10
+OUTPUT_DIR: "checkpoints/voc/faster_rcnn/faster_rcnn_R_101_FPN_ft_normalized_all1_10shot_randnovel"
+SSL: True
+ROT: True
+JIG: True
+[03/05 13:18:54] fs3c INFO: Full config saved to /home/xd1/ssl/checkpoints/voc/faster_rcnn/faster_rcnn_R_101_FPN_ft_normalized_all1_10shot_randnovel/config.yaml
+[03/05 13:18:54] fs3c.utils.env INFO: Using a generated random seed 54693829
+[03/05 13:18:55] fs3c.data.build INFO: Removed 0 images with no usable annotations. 200 images left.
+[03/05 13:18:55] fs3c.data.build INFO: Distribution of training instances among all 20 categories:
+[36m|  category  | #instances   |  category   | #instances   |  category   | #instances   |
+|:----------:|:-------------|:-----------:|:-------------|:-----------:|:-------------|
+| aeroplane  | 10           |   bicycle   | 10           |    boat     | 10           |
+|   bottle   | 10           |     car     | 10           |     cat     | 10           |
+|   chair    | 10           | diningtable | 10           |     dog     | 10           |
+|   horse    | 10           |   person    | 10           | pottedplant | 10           |
+|   sheep    | 10           |    train    | 10           |  tvmonitor  | 10           |
+|    bird    | 10           |     bus     | 10           |     cow     | 10           |
+| motorbike  | 10           |    sofa     | 10           |             |              |
+|   total    | 200          |             |              |             |              |[0m
+[03/05 13:18:55] fs3c.data.detection_utils INFO: TransformGens used in training: [ResizeShortestEdge(short_edge_length=(480, 512, 544, 576, 608, 640, 672, 704, 736, 768, 800), max_size=1333, sample_style='choice'), RandomFlip()]
+[03/05 13:18:55] fs3c.data.build INFO: Using training sampler TrainingSampler
+[03/05 13:18:55] fs3c.data.build INFO: Removed 0 images with no usable annotations. 200 images left.
+[03/05 13:18:55] fs3c.data.detection_utils INFO: TransformGens used in training: [ResizeShortestEdge(short_edge_length=(480, 512, 544, 576, 608, 640, 672, 704, 736, 768, 800), max_size=1333, sample_style='choice'), RandomFlip()]
+[03/05 13:18:55] fs3c.data.build INFO: Using training sampler TrainingSampler
+[03/05 13:27:20] fs3c INFO: Rank of current process: 0. World size: 2
+[03/05 13:27:20] fs3c INFO: Command line arguments: Namespace(config_file='configs/PascalVOC-detection/split1/faster_rcnn_R_101_FPN_ft_all1_10shot.yaml', dist_url='tcp://127.0.0.1:52117', end_iter=-1, eval_all=False, eval_during_train=False, eval_iter=-1, eval_only=False, machine_rank=0, num_gpus=2, num_machines=1, opts=[], resume=False, start_iter=-1)
+[03/05 13:27:20] fs3c INFO: Contents of args.config_file=configs/PascalVOC-detection/split1/faster_rcnn_R_101_FPN_ft_all1_10shot.yaml:
+_BASE_: "../../Base-RCNN-FPN.yaml"
+MODEL:
+  WEIGHTS: "checkpoints/voc/faster_rcnn/faster_rcnn_R_101_FPN_base1/model_reset_surgery.pth"
+  BASE: "checkpoints/voc/faster_rcnn/faster_rcnn_R_101_FPN_base1/model_final.pth"
+  MASK_ON: False
+  RESNETS:
+    DEPTH: 101
+  ROI_HEADS:
+    NUM_CLASSES: 20
+    OUTPUT_LAYER: "CosineSimOutputLayers"
+    FREEZE_FEAT: False
+  BACKBONE:
+    FREEZE: False
+  PROPOSAL_GENERATOR:
+    FREEZE: False
+INPUT:
+  MIN_SIZE_TRAIN: (480, 512, 544, 576, 608, 640, 672, 704, 736, 768, 800)
+  MIN_SIZE_TEST: 800
+DATASETS:
+  TRAIN: ('voc_2007_trainval_all1_10shot',)
+  TEST: ('voc_2007_test_all1',)
+  SSL: ('voc_2007_trainval_all1_10shot',)
+SOLVER:
+  IMS_PER_BATCH: 16
+  BASE_LR: 0.02
+  STEPS: (450, 850 )
+  MAX_ITER: 1000
+  CHECKPOINT_PERIOD: 100
+  #WARMUP_ITERS: 10
+OUTPUT_DIR: "checkpoints/voc/faster_rcnn/faster_rcnn_R_101_FPN_ft_normalized_all1_10shot_randnovel"
+SSL: True
+ROT: True
+JIG: True
+[03/05 13:27:20] fs3c INFO: Full config saved to /home/xd1/ssl/checkpoints/voc/faster_rcnn/faster_rcnn_R_101_FPN_ft_normalized_all1_10shot_randnovel/config.yaml
+[03/05 13:27:20] fs3c.utils.env INFO: Using a generated random seed 20738708
+[03/05 13:27:22] fs3c.data.build INFO: Removed 0 images with no usable annotations. 200 images left.
+[03/05 13:27:22] fs3c.data.build INFO: Distribution of training instances among all 20 categories:
+[36m|  category  | #instances   |  category   | #instances   |  category   | #instances   |
+|:----------:|:-------------|:-----------:|:-------------|:-----------:|:-------------|
+| aeroplane  | 10           |   bicycle   | 10           |    boat     | 10           |
+|   bottle   | 10           |     car     | 10           |     cat     | 10           |
+|   chair    | 10           | diningtable | 10           |     dog     | 10           |
+|   horse    | 10           |   person    | 10           | pottedplant | 10           |
+|   sheep    | 10           |    train    | 10           |  tvmonitor  | 10           |
+|    bird    | 10           |     bus     | 10           |     cow     | 10           |
+| motorbike  | 10           |    sofa     | 10           |             |              |
+|   total    | 200          |             |              |             |              |[0m
+[03/05 13:27:22] fs3c.data.detection_utils INFO: TransformGens used in training: [ResizeShortestEdge(short_edge_length=(480, 512, 544, 576, 608, 640, 672, 704, 736, 768, 800), max_size=1333, sample_style='choice'), RandomFlip()]
+[03/05 13:27:22] fs3c.data.build INFO: Using training sampler TrainingSampler
+[03/05 13:27:22] fs3c.data.build INFO: Removed 0 images with no usable annotations. 200 images left.
+[03/05 13:27:22] fs3c.data.detection_utils INFO: TransformGens used in training: [ResizeShortestEdge(short_edge_length=(480, 512, 544, 576, 608, 640, 672, 704, 736, 768, 800), max_size=1333, sample_style='choice'), RandomFlip()]
+[03/05 13:27:22] fs3c.data.build INFO: Using training sampler TrainingSampler
+[03/05 13:45:31] fs3c INFO: Rank of current process: 0. World size: 2
+[03/05 13:45:31] fs3c INFO: Command line arguments: Namespace(config_file='configs/PascalVOC-detection/split1/faster_rcnn_R_101_FPN_ft_all1_10shot.yaml', dist_url='tcp://127.0.0.1:52117', end_iter=-1, eval_all=False, eval_during_train=False, eval_iter=-1, eval_only=False, machine_rank=0, num_gpus=2, num_machines=1, opts=[], resume=False, start_iter=-1)
+[03/05 13:45:31] fs3c INFO: Contents of args.config_file=configs/PascalVOC-detection/split1/faster_rcnn_R_101_FPN_ft_all1_10shot.yaml:
+_BASE_: "../../Base-RCNN-FPN.yaml"
+MODEL:
+  WEIGHTS: "checkpoints/voc/faster_rcnn/faster_rcnn_R_101_FPN_base1/model_reset_surgery.pth"
+  BASE: "checkpoints/voc/faster_rcnn/faster_rcnn_R_101_FPN_base1/model_final.pth"
+  MASK_ON: False
+  RESNETS:
+    DEPTH: 101
+  ROI_HEADS:
+    NUM_CLASSES: 20
+    OUTPUT_LAYER: "CosineSimOutputLayers"
+    FREEZE_FEAT: False
+  BACKBONE:
+    FREEZE: False
+  PROPOSAL_GENERATOR:
+    FREEZE: False
+INPUT:
+  MIN_SIZE_TRAIN: (480, 512, 544, 576, 608, 640, 672, 704, 736, 768, 800)
+  MIN_SIZE_TEST: 800
+DATASETS:
+  TRAIN: ('voc_2007_trainval_all1_10shot',)
+  TEST: ('voc_2007_test_all1',)
+  SSL: ('voc_2007_trainval_all1_10shot',)
+SOLVER:
+  IMS_PER_BATCH: 16
+  BASE_LR: 0.02
+  STEPS: (450, 850 )
+  MAX_ITER: 1000
+  CHECKPOINT_PERIOD: 100
+  #WARMUP_ITERS: 10
+OUTPUT_DIR: "checkpoints/voc/faster_rcnn/faster_rcnn_R_101_FPN_ft_normalized_all1_10shot_randnovel"
+SSL: True
+ROT: True
+JIG: True
+[03/05 13:45:31] fs3c INFO: Full config saved to /home/xd1/ssl/checkpoints/voc/faster_rcnn/faster_rcnn_R_101_FPN_ft_normalized_all1_10shot_randnovel/config.yaml
+[03/05 13:45:31] fs3c.utils.env INFO: Using a generated random seed 31731530
+[03/05 13:45:33] fs3c.data.build INFO: Removed 0 images with no usable annotations. 200 images left.
+[03/05 13:45:33] fs3c.data.build INFO: Distribution of training instances among all 20 categories:
+[36m|  category  | #instances   |  category   | #instances   |  category   | #instances   |
+|:----------:|:-------------|:-----------:|:-------------|:-----------:|:-------------|
+| aeroplane  | 10           |   bicycle   | 10           |    boat     | 10           |
+|   bottle   | 10           |     car     | 10           |     cat     | 10           |
+|   chair    | 10           | diningtable | 10           |     dog     | 10           |
+|   horse    | 10           |   person    | 10           | pottedplant | 10           |
+|   sheep    | 10           |    train    | 10           |  tvmonitor  | 10           |
+|    bird    | 10           |     bus     | 10           |     cow     | 10           |
+| motorbike  | 10           |    sofa     | 10           |             |              |
+|   total    | 200          |             |              |             |              |[0m
+[03/05 13:45:33] fs3c.data.detection_utils INFO: TransformGens used in training: [ResizeShortestEdge(short_edge_length=(480, 512, 544, 576, 608, 640, 672, 704, 736, 768, 800), max_size=1333, sample_style='choice'), RandomFlip()]
+[03/05 13:45:33] fs3c.data.build INFO: Using training sampler TrainingSampler
+[03/05 13:45:33] fs3c.data.build INFO: Removed 0 images with no usable annotations. 200 images left.
+[03/05 13:45:33] fs3c.data.detection_utils INFO: TransformGens used in training: [ResizeShortestEdge(short_edge_length=(480, 512, 544, 576, 608, 640, 672, 704, 736, 768, 800), max_size=1333, sample_style='choice'), RandomFlip()]
+[03/05 13:45:33] fs3c.data.build INFO: Using training sampler TrainingSampler
+[03/05 14:18:50] fs3c INFO: Rank of current process: 0. World size: 2
+[03/05 14:18:50] fs3c INFO: Command line arguments: Namespace(config_file='configs/PascalVOC-detection/split1/faster_rcnn_R_101_FPN_ft_all1_10shot.yaml', dist_url='tcp://127.0.0.1:52117', end_iter=-1, eval_all=False, eval_during_train=False, eval_iter=-1, eval_only=False, machine_rank=0, num_gpus=2, num_machines=1, opts=[], resume=False, start_iter=-1)
+[03/05 14:18:50] fs3c INFO: Contents of args.config_file=configs/PascalVOC-detection/split1/faster_rcnn_R_101_FPN_ft_all1_10shot.yaml:
+_BASE_: "../../Base-RCNN-FPN.yaml"
+MODEL:
+  WEIGHTS: "checkpoints/voc/faster_rcnn/faster_rcnn_R_101_FPN_base1/model_reset_surgery.pth"
+  BASE: "checkpoints/voc/faster_rcnn/faster_rcnn_R_101_FPN_base1/model_final.pth"
+  MASK_ON: False
+  RESNETS:
+    DEPTH: 101
+  ROI_HEADS:
+    NUM_CLASSES: 20
+    OUTPUT_LAYER: "CosineSimOutputLayers"
+    FREEZE_FEAT: False
+  BACKBONE:
+    FREEZE: False
+  PROPOSAL_GENERATOR:
+    FREEZE: False
+INPUT:
+  MIN_SIZE_TRAIN: (480, 512, 544, 576, 608, 640, 672, 704, 736, 768, 800)
+  MIN_SIZE_TEST: 800
+DATASETS:
+  TRAIN: ('voc_2007_trainval_all1_10shot',)
+  TEST: ('voc_2007_test_all1',)
+  SSL: ('voc_2007_trainval_all1_10shot',)
+SOLVER:
+  IMS_PER_BATCH: 16
+  BASE_LR: 0.02
+  STEPS: (450, 850 )
+  MAX_ITER: 1000
+  CHECKPOINT_PERIOD: 100
+  #WARMUP_ITERS: 10
+OUTPUT_DIR: "checkpoints/voc/faster_rcnn/faster_rcnn_R_101_FPN_ft_normalized_all1_10shot_randnovel"
+SSL: True
+ROT: True
+JIG: True
+[03/05 14:18:50] fs3c INFO: Full config saved to /home/xd1/ssl/checkpoints/voc/faster_rcnn/faster_rcnn_R_101_FPN_ft_normalized_all1_10shot_randnovel/config.yaml
+[03/05 14:18:50] fs3c.utils.env INFO: Using a generated random seed 50392533
+[03/05 14:18:53] fs3c.data.build INFO: Removed 0 images with no usable annotations. 200 images left.
+[03/05 14:18:53] fs3c.data.build INFO: Distribution of training instances among all 20 categories:
+[36m|  category  | #instances   |  category   | #instances   |  category   | #instances   |
+|:----------:|:-------------|:-----------:|:-------------|:-----------:|:-------------|
+| aeroplane  | 10           |   bicycle   | 10           |    boat     | 10           |
+|   bottle   | 10           |     car     | 10           |     cat     | 10           |
+|   chair    | 10           | diningtable | 10           |     dog     | 10           |
+|   horse    | 10           |   person    | 10           | pottedplant | 10           |
+|   sheep    | 10           |    train    | 10           |  tvmonitor  | 10           |
+|    bird    | 10           |     bus     | 10           |     cow     | 10           |
+| motorbike  | 10           |    sofa     | 10           |             |              |
+|   total    | 200          |             |              |             |              |[0m
+[03/05 14:18:53] fs3c.data.detection_utils INFO: TransformGens used in training: [ResizeShortestEdge(short_edge_length=(480, 512, 544, 576, 608, 640, 672, 704, 736, 768, 800), max_size=1333, sample_style='choice'), RandomFlip()]
+[03/05 14:18:53] fs3c.data.build INFO: Using training sampler TrainingSampler
+[03/05 14:18:53] fs3c.data.build INFO: Removed 0 images with no usable annotations. 200 images left.
+[03/05 14:18:53] fs3c.data.detection_utils INFO: TransformGens used in training: [ResizeShortestEdge(short_edge_length=(480, 512, 544, 576, 608, 640, 672, 704, 736, 768, 800), max_size=1333, sample_style='choice'), RandomFlip()]
+[03/05 14:18:53] fs3c.data.build INFO: Using training sampler TrainingSampler
+[03/05 14:34:39] fs3c INFO: Rank of current process: 0. World size: 2
+[03/05 14:34:39] fs3c INFO: Command line arguments: Namespace(config_file='configs/PascalVOC-detection/split1/faster_rcnn_R_101_FPN_ft_all1_10shot.yaml', dist_url='tcp://127.0.0.1:52117', end_iter=-1, eval_all=False, eval_during_train=False, eval_iter=-1, eval_only=False, machine_rank=0, num_gpus=2, num_machines=1, opts=[], resume=False, start_iter=-1)
+[03/05 14:34:39] fs3c INFO: Contents of args.config_file=configs/PascalVOC-detection/split1/faster_rcnn_R_101_FPN_ft_all1_10shot.yaml:
+_BASE_: "../../Base-RCNN-FPN.yaml"
+MODEL:
+  WEIGHTS: "checkpoints/voc/faster_rcnn/faster_rcnn_R_101_FPN_base1/model_reset_surgery.pth"
+  BASE: "checkpoints/voc/faster_rcnn/faster_rcnn_R_101_FPN_base1/model_final.pth"
+  MASK_ON: False
+  RESNETS:
+    DEPTH: 101
+  ROI_HEADS:
+    NUM_CLASSES: 20
+    OUTPUT_LAYER: "CosineSimOutputLayers"
+    FREEZE_FEAT: False
+  BACKBONE:
+    FREEZE: False
+  PROPOSAL_GENERATOR:
+    FREEZE: False
+INPUT:
+  MIN_SIZE_TRAIN: (480, 512, 544, 576, 608, 640, 672, 704, 736, 768, 800)
+  MIN_SIZE_TEST: 800
+DATASETS:
+  TRAIN: ('voc_2007_trainval_all1_10shot',)
+  TEST: ('voc_2007_test_all1',)
+  SSL: ('voc_2007_trainval_all1_10shot',)
+SOLVER:
+  IMS_PER_BATCH: 16
+  BASE_LR: 0.02
+  STEPS: (450, 850 )
+  MAX_ITER: 1000
+  CHECKPOINT_PERIOD: 100
+  #WARMUP_ITERS: 10
+OUTPUT_DIR: "checkpoints/voc/faster_rcnn/faster_rcnn_R_101_FPN_ft_normalized_all1_10shot_randnovel"
+SSL: True
+ROT: True
+JIG: True
+CON: True
+[03/05 14:34:39] fs3c INFO: Full config saved to /home/xd1/ssl/checkpoints/voc/faster_rcnn/faster_rcnn_R_101_FPN_ft_normalized_all1_10shot_randnovel/config.yaml
+[03/05 14:34:39] fs3c.utils.env INFO: Using a generated random seed 40050681
+[03/05 14:34:41] fs3c.data.build INFO: Removed 0 images with no usable annotations. 200 images left.
+[03/05 14:34:41] fs3c.data.build INFO: Distribution of training instances among all 20 categories:
+[36m|  category  | #instances   |  category   | #instances   |  category   | #instances   |
+|:----------:|:-------------|:-----------:|:-------------|:-----------:|:-------------|
+| aeroplane  | 10           |   bicycle   | 10           |    boat     | 10           |
+|   bottle   | 10           |     car     | 10           |     cat     | 10           |
+|   chair    | 10           | diningtable | 10           |     dog     | 10           |
+|   horse    | 10           |   person    | 10           | pottedplant | 10           |
+|   sheep    | 10           |    train    | 10           |  tvmonitor  | 10           |
+|    bird    | 10           |     bus     | 10           |     cow     | 10           |
+| motorbike  | 10           |    sofa     | 10           |             |              |
+|   total    | 200          |             |              |             |              |[0m
+[03/05 14:34:41] fs3c.data.detection_utils INFO: TransformGens used in training: [ResizeShortestEdge(short_edge_length=(480, 512, 544, 576, 608, 640, 672, 704, 736, 768, 800), max_size=1333, sample_style='choice'), RandomFlip()]
+[03/05 14:34:41] fs3c.data.build INFO: Using training sampler TrainingSampler
+[03/05 14:34:41] fs3c.data.build INFO: Removed 0 images with no usable annotations. 200 images left.
+[03/05 14:34:41] fs3c.data.detection_utils INFO: TransformGens used in training: [ResizeShortestEdge(short_edge_length=(480, 512, 544, 576, 608, 640, 672, 704, 736, 768, 800), max_size=1333, sample_style='choice'), RandomFlip()]
+[03/05 14:34:41] fs3c.data.build INFO: Using training sampler TrainingSampler
+[03/05 14:50:01] fs3c INFO: Rank of current process: 0. World size: 2
+[03/05 14:50:01] fs3c INFO: Command line arguments: Namespace(config_file='configs/PascalVOC-detection/split1/faster_rcnn_R_101_FPN_ft_all1_10shot.yaml', dist_url='tcp://127.0.0.1:52117', end_iter=-1, eval_all=False, eval_during_train=False, eval_iter=-1, eval_only=False, machine_rank=0, num_gpus=2, num_machines=1, opts=[], resume=False, start_iter=-1)
+[03/05 14:50:01] fs3c INFO: Contents of args.config_file=configs/PascalVOC-detection/split1/faster_rcnn_R_101_FPN_ft_all1_10shot.yaml:
+_BASE_: "../../Base-RCNN-FPN.yaml"
+MODEL:
+  WEIGHTS: "checkpoints/voc/faster_rcnn/faster_rcnn_R_101_FPN_base1/model_reset_surgery.pth"
+  BASE: "checkpoints/voc/faster_rcnn/faster_rcnn_R_101_FPN_base1/model_final.pth"
+  MASK_ON: False
+  RESNETS:
+    DEPTH: 101
+  ROI_HEADS:
+    NUM_CLASSES: 20
+    OUTPUT_LAYER: "CosineSimOutputLayers"
+    FREEZE_FEAT: False
+  BACKBONE:
+    FREEZE: False
+  PROPOSAL_GENERATOR:
+    FREEZE: False
+INPUT:
+  MIN_SIZE_TRAIN: (480, 512, 544, 576, 608, 640, 672, 704, 736, 768, 800)
+  MIN_SIZE_TEST: 800
+DATASETS:
+  TRAIN: ('voc_2007_trainval_all1_10shot',)
+  TEST: ('voc_2007_test_all1',)
+  SSL: ('voc_2007_trainval_all1_10shot',)
+SOLVER:
+  IMS_PER_BATCH: 16
+  BASE_LR: 0.02
+  STEPS: (450, 850 )
+  MAX_ITER: 1000
+  CHECKPOINT_PERIOD: 100
+  #WARMUP_ITERS: 10
+OUTPUT_DIR: "checkpoints/voc/faster_rcnn/faster_rcnn_R_101_FPN_ft_normalized_all1_10shot_randnovel"
+SSL: True
+ROT: True
+JIG: True
+CON: True
+[03/05 14:50:01] fs3c INFO: Full config saved to /home/xd1/ssl/checkpoints/voc/faster_rcnn/faster_rcnn_R_101_FPN_ft_normalized_all1_10shot_randnovel/config.yaml
+[03/05 14:50:01] fs3c.utils.env INFO: Using a generated random seed 1942096
+[03/05 14:50:03] fs3c.data.build INFO: Removed 0 images with no usable annotations. 200 images left.
+[03/05 14:50:03] fs3c.data.build INFO: Distribution of training instances among all 20 categories:
+[36m|  category  | #instances   |  category   | #instances   |  category   | #instances   |
+|:----------:|:-------------|:-----------:|:-------------|:-----------:|:-------------|
+| aeroplane  | 10           |   bicycle   | 10           |    boat     | 10           |
+|   bottle   | 10           |     car     | 10           |     cat     | 10           |
+|   chair    | 10           | diningtable | 10           |     dog     | 10           |
+|   horse    | 10           |   person    | 10           | pottedplant | 10           |
+|   sheep    | 10           |    train    | 10           |  tvmonitor  | 10           |
+|    bird    | 10           |     bus     | 10           |     cow     | 10           |
+| motorbike  | 10           |    sofa     | 10           |             |              |
+|   total    | 200          |             |              |             |              |[0m
+[03/05 14:50:03] fs3c.data.detection_utils INFO: TransformGens used in training: [ResizeShortestEdge(short_edge_length=(480, 512, 544, 576, 608, 640, 672, 704, 736, 768, 800), max_size=1333, sample_style='choice'), RandomFlip()]
+[03/05 14:50:03] fs3c.data.build INFO: Using training sampler TrainingSampler
+[03/05 14:50:03] fs3c.data.build INFO: Removed 0 images with no usable annotations. 200 images left.
+[03/05 14:50:03] fs3c.data.detection_utils INFO: TransformGens used in training: [ResizeShortestEdge(short_edge_length=(480, 512, 544, 576, 608, 640, 672, 704, 736, 768, 800), max_size=1333, sample_style='choice'), RandomFlip()]
+[03/05 14:50:03] fs3c.data.build INFO: Using training sampler TrainingSampler
+[03/05 14:53:22] fs3c INFO: Rank of current process: 0. World size: 2
+[03/05 14:53:22] fs3c INFO: Command line arguments: Namespace(config_file='configs/PascalVOC-detection/split1/faster_rcnn_R_101_FPN_ft_all1_10shot.yaml', dist_url='tcp://127.0.0.1:52117', end_iter=-1, eval_all=False, eval_during_train=False, eval_iter=-1, eval_only=False, machine_rank=0, num_gpus=2, num_machines=1, opts=[], resume=False, start_iter=-1)
+[03/05 14:53:22] fs3c INFO: Contents of args.config_file=configs/PascalVOC-detection/split1/faster_rcnn_R_101_FPN_ft_all1_10shot.yaml:
+_BASE_: "../../Base-RCNN-FPN.yaml"
+MODEL:
+  WEIGHTS: "checkpoints/voc/faster_rcnn/faster_rcnn_R_101_FPN_base1/model_reset_surgery.pth"
+  BASE: "checkpoints/voc/faster_rcnn/faster_rcnn_R_101_FPN_base1/model_final.pth"
+  MASK_ON: False
+  RESNETS:
+    DEPTH: 101
+  ROI_HEADS:
+    NUM_CLASSES: 20
+    OUTPUT_LAYER: "CosineSimOutputLayers"
+    FREEZE_FEAT: False
+  BACKBONE:
+    FREEZE: False
+  PROPOSAL_GENERATOR:
+    FREEZE: False
+INPUT:
+  MIN_SIZE_TRAIN: (480, 512, 544, 576, 608, 640, 672, 704, 736, 768, 800)
+  MIN_SIZE_TEST: 800
+DATASETS:
+  TRAIN: ('voc_2007_trainval_all1_10shot',)
+  TEST: ('voc_2007_test_all1',)
+  SSL: ('voc_2007_trainval_all1_10shot',)
+SOLVER:
+  IMS_PER_BATCH: 16
+  BASE_LR: 0.02
+  STEPS: (450, 850 )
+  MAX_ITER: 1000
+  CHECKPOINT_PERIOD: 100
+  #WARMUP_ITERS: 10
+OUTPUT_DIR: "checkpoints/voc/faster_rcnn/faster_rcnn_R_101_FPN_ft_normalized_all1_10shot_randnovel"
+SSL: True
+ROT: True
+JIG: True
+CON: True
+[03/05 14:53:23] fs3c INFO: Full config saved to /home/xd1/ssl/checkpoints/voc/faster_rcnn/faster_rcnn_R_101_FPN_ft_normalized_all1_10shot_randnovel/config.yaml
+[03/05 14:53:23] fs3c.utils.env INFO: Using a generated random seed 23030524
+[03/05 14:53:24] fs3c.data.build INFO: Removed 0 images with no usable annotations. 200 images left.
+[03/05 14:53:24] fs3c.data.build INFO: Distribution of training instances among all 20 categories:
+[36m|  category  | #instances   |  category   | #instances   |  category   | #instances   |
+|:----------:|:-------------|:-----------:|:-------------|:-----------:|:-------------|
+| aeroplane  | 10           |   bicycle   | 10           |    boat     | 10           |
+|   bottle   | 10           |     car     | 10           |     cat     | 10           |
+|   chair    | 10           | diningtable | 10           |     dog     | 10           |
+|   horse    | 10           |   person    | 10           | pottedplant | 10           |
+|   sheep    | 10           |    train    | 10           |  tvmonitor  | 10           |
+|    bird    | 10           |     bus     | 10           |     cow     | 10           |
+| motorbike  | 10           |    sofa     | 10           |             |              |
+|   total    | 200          |             |              |             |              |[0m
+[03/05 14:53:24] fs3c.data.detection_utils INFO: TransformGens used in training: [ResizeShortestEdge(short_edge_length=(480, 512, 544, 576, 608, 640, 672, 704, 736, 768, 800), max_size=1333, sample_style='choice'), RandomFlip()]
+[03/05 14:53:24] fs3c.data.build INFO: Using training sampler TrainingSampler
+[03/05 14:53:24] fs3c.data.build INFO: Removed 0 images with no usable annotations. 200 images left.
+[03/05 14:53:24] fs3c.data.detection_utils INFO: TransformGens used in training: [ResizeShortestEdge(short_edge_length=(480, 512, 544, 576, 608, 640, 672, 704, 736, 768, 800), max_size=1333, sample_style='choice'), RandomFlip()]
+[03/05 14:53:24] fs3c.data.build INFO: Using training sampler TrainingSampler
+[03/05 15:01:32] fs3c INFO: Rank of current process: 0. World size: 2
+[03/05 15:01:32] fs3c INFO: Command line arguments: Namespace(config_file='configs/PascalVOC-detection/split1/faster_rcnn_R_101_FPN_ft_all1_10shot.yaml', dist_url='tcp://127.0.0.1:52117', end_iter=-1, eval_all=False, eval_during_train=False, eval_iter=-1, eval_only=False, machine_rank=0, num_gpus=2, num_machines=1, opts=[], resume=False, start_iter=-1)
+[03/05 15:01:32] fs3c INFO: Contents of args.config_file=configs/PascalVOC-detection/split1/faster_rcnn_R_101_FPN_ft_all1_10shot.yaml:
+_BASE_: "../../Base-RCNN-FPN.yaml"
+MODEL:
+  WEIGHTS: "checkpoints/voc/faster_rcnn/faster_rcnn_R_101_FPN_base1/model_reset_surgery.pth"
+  BASE: "checkpoints/voc/faster_rcnn/faster_rcnn_R_101_FPN_base1/model_final.pth"
+  MASK_ON: False
+  RESNETS:
+    DEPTH: 101
+  ROI_HEADS:
+    NUM_CLASSES: 20
+    OUTPUT_LAYER: "CosineSimOutputLayers"
+    FREEZE_FEAT: False
+  BACKBONE:
+    FREEZE: False
+  PROPOSAL_GENERATOR:
+    FREEZE: False
+INPUT:
+  MIN_SIZE_TRAIN: (480, 512, 544, 576, 608, 640, 672, 704, 736, 768, 800)
+  MIN_SIZE_TEST: 800
+DATASETS:
+  TRAIN: ('voc_2007_trainval_all1_10shot',)
+  TEST: ('voc_2007_test_all1',)
+  SSL: ('voc_2007_trainval_all1_10shot',)
+SOLVER:
+  IMS_PER_BATCH: 16
+  BASE_LR: 0.02
+  STEPS: (450, 850 )
+  MAX_ITER: 1000
+  CHECKPOINT_PERIOD: 100
+  #WARMUP_ITERS: 10
+OUTPUT_DIR: "checkpoints/voc/faster_rcnn/faster_rcnn_R_101_FPN_ft_normalized_all1_10shot_randnovel"
+SSL: True
+ROT: True
+JIG: True
+CON: True
+[03/05 15:01:32] fs3c INFO: Full config saved to /home/xd1/ssl/checkpoints/voc/faster_rcnn/faster_rcnn_R_101_FPN_ft_normalized_all1_10shot_randnovel/config.yaml
+[03/05 15:01:32] fs3c.utils.env INFO: Using a generated random seed 32335500
+[03/05 15:01:33] fs3c.data.build INFO: Removed 0 images with no usable annotations. 200 images left.
+[03/05 15:01:33] fs3c.data.build INFO: Distribution of training instances among all 20 categories:
+[36m|  category  | #instances   |  category   | #instances   |  category   | #instances   |
+|:----------:|:-------------|:-----------:|:-------------|:-----------:|:-------------|
+| aeroplane  | 10           |   bicycle   | 10           |    boat     | 10           |
+|   bottle   | 10           |     car     | 10           |     cat     | 10           |
+|   chair    | 10           | diningtable | 10           |     dog     | 10           |
+|   horse    | 10           |   person    | 10           | pottedplant | 10           |
+|   sheep    | 10           |    train    | 10           |  tvmonitor  | 10           |
+|    bird    | 10           |     bus     | 10           |     cow     | 10           |
+| motorbike  | 10           |    sofa     | 10           |             |              |
+|   total    | 200          |             |              |             |              |[0m
+[03/05 15:01:33] fs3c.data.detection_utils INFO: TransformGens used in training: [ResizeShortestEdge(short_edge_length=(480, 512, 544, 576, 608, 640, 672, 704, 736, 768, 800), max_size=1333, sample_style='choice'), RandomFlip()]
+[03/05 15:01:33] fs3c.data.build INFO: Using training sampler TrainingSampler
+[03/05 15:01:33] fs3c.data.build INFO: Removed 0 images with no usable annotations. 200 images left.
+[03/05 15:01:33] fs3c.data.detection_utils INFO: TransformGens used in training: [ResizeShortestEdge(short_edge_length=(480, 512, 544, 576, 608, 640, 672, 704, 736, 768, 800), max_size=1333, sample_style='choice'), RandomFlip()]
+[03/05 15:01:33] fs3c.data.build INFO: Using training sampler TrainingSampler
+[03/05 15:08:44] fs3c INFO: Rank of current process: 0. World size: 2
+[03/05 15:08:44] fs3c INFO: Command line arguments: Namespace(config_file='configs/PascalVOC-detection/split1/faster_rcnn_R_101_FPN_ft_all1_10shot.yaml', dist_url='tcp://127.0.0.1:52117', end_iter=-1, eval_all=False, eval_during_train=False, eval_iter=-1, eval_only=False, machine_rank=0, num_gpus=2, num_machines=1, opts=[], resume=False, start_iter=-1)
+[03/05 15:08:44] fs3c INFO: Contents of args.config_file=configs/PascalVOC-detection/split1/faster_rcnn_R_101_FPN_ft_all1_10shot.yaml:
+_BASE_: "../../Base-RCNN-FPN.yaml"
+MODEL:
+  WEIGHTS: "checkpoints/voc/faster_rcnn/faster_rcnn_R_101_FPN_base1/model_reset_surgery.pth"
+  BASE: "checkpoints/voc/faster_rcnn/faster_rcnn_R_101_FPN_base1/model_final.pth"
+  MASK_ON: False
+  RESNETS:
+    DEPTH: 101
+  ROI_HEADS:
+    NUM_CLASSES: 20
+    OUTPUT_LAYER: "CosineSimOutputLayers"
+    FREEZE_FEAT: False
+  BACKBONE:
+    FREEZE: False
+  PROPOSAL_GENERATOR:
+    FREEZE: False
+INPUT:
+  MIN_SIZE_TRAIN: (480, 512, 544, 576, 608, 640, 672, 704, 736, 768, 800)
+  MIN_SIZE_TEST: 800
+DATASETS:
+  TRAIN: ('voc_2007_trainval_all1_10shot',)
+  TEST: ('voc_2007_test_all1',)
+  SSL: ('voc_2007_trainval_all1_10shot',)
+SOLVER:
+  IMS_PER_BATCH: 16
+  BASE_LR: 0.02
+  STEPS: (450, 850 )
+  MAX_ITER: 1000
+  CHECKPOINT_PERIOD: 100
+  #WARMUP_ITERS: 10
+OUTPUT_DIR: "checkpoints/voc/faster_rcnn/faster_rcnn_R_101_FPN_ft_normalized_all1_10shot_randnovel"
+SSL: True
+ROT: True
+JIG: True
+CON: True
+[03/05 15:08:44] fs3c INFO: Full config saved to /home/xd1/ssl/checkpoints/voc/faster_rcnn/faster_rcnn_R_101_FPN_ft_normalized_all1_10shot_randnovel/config.yaml
+[03/05 15:08:44] fs3c.utils.env INFO: Using a generated random seed 44186361
+[03/05 15:08:45] fs3c.data.build INFO: Removed 0 images with no usable annotations. 200 images left.
+[03/05 15:08:45] fs3c.data.build INFO: Distribution of training instances among all 20 categories:
+[36m|  category  | #instances   |  category   | #instances   |  category   | #instances   |
+|:----------:|:-------------|:-----------:|:-------------|:-----------:|:-------------|
+| aeroplane  | 10           |   bicycle   | 10           |    boat     | 10           |
+|   bottle   | 10           |     car     | 10           |     cat     | 10           |
+|   chair    | 10           | diningtable | 10           |     dog     | 10           |
+|   horse    | 10           |   person    | 10           | pottedplant | 10           |
+|   sheep    | 10           |    train    | 10           |  tvmonitor  | 10           |
+|    bird    | 10           |     bus     | 10           |     cow     | 10           |
+| motorbike  | 10           |    sofa     | 10           |             |              |
+|   total    | 200          |             |              |             |              |[0m
+[03/05 15:08:45] fs3c.data.detection_utils INFO: TransformGens used in training: [ResizeShortestEdge(short_edge_length=(480, 512, 544, 576, 608, 640, 672, 704, 736, 768, 800), max_size=1333, sample_style='choice'), RandomFlip()]
+[03/05 15:08:45] fs3c.data.build INFO: Using training sampler TrainingSampler
+[03/05 15:08:45] fs3c.data.build INFO: Removed 0 images with no usable annotations. 200 images left.
+[03/05 15:08:45] fs3c.data.detection_utils INFO: TransformGens used in training: [ResizeShortestEdge(short_edge_length=(480, 512, 544, 576, 608, 640, 672, 704, 736, 768, 800), max_size=1333, sample_style='choice'), RandomFlip()]
+[03/05 15:08:45] fs3c.data.build INFO: Using training sampler TrainingSampler
