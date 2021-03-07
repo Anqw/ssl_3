@@ -176,8 +176,8 @@ class GeneralizedRCNN(nn.Module):
             for x in batched_inputs[1]:
                 patch = x["con"].to(self.device)
                 patches_list.append(patch)
-            patches = torch.stack(patches_list, 0)
-            B, N, C, H, W = patches.size()
+            patches = torch.stack(patches_list, 0).transpose(0,1)
+            N, B, C, H, W = patches.size()
             patches = patches.view(B * N, C, H, W)
             labels = torch.zeros(N*B).to(self.device).long()
             features_ssl = self.backbone(patches)
