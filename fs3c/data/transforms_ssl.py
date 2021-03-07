@@ -43,7 +43,7 @@ class GaussianBlur(object):
         x = x.filter(ImageFilter.GaussianBlur(radius=sigma))
         return x
 
-def con(img):
+'''def con(img):
     image_size = 224
     crop = 0.08
     transform_1 = transform_coord.Compose([
@@ -69,7 +69,25 @@ def con(img):
     img = normalizer(torch.as_tensor(np.asarray(img).transpose(2, 0, 1).astype("float32")))
     img2, coord2 = img_2
     img2 = normalizer(torch.as_tensor(np.asarray(img2).transpose(2, 0, 1).astype("float32")))
-    return img, img2, coord, coord2
+    return img, img2, coord, coord2'''
+def con(img):
+    color_jitter = transforms.ColorJitter(0.8, 0.8, 0.8, 0.2)
+    transform_contrastive = transforms.Compose([
+                transforms.RandomResizedCrop(size=224),
+                transforms.RandomHorizontalFlip(),  # with 0.5 probability
+                transforms.RandomApply([self.color_jitter], p=0.8),
+                transforms.RandomGrayscale(p=0.2),])
+    pil_image = Image.fromarray(img)
+    data_list = []
+    for _ in range(2):
+        img = self.transform_contrastive(img)
+        img = np.asarray(img)
+        aug_img = normalizer(torch.as_tensor(img.transpose(2, 0, 1).astype("float32"))
+        data_list.append(aug_img)
+    data = torch.stack(data_list, 0)
+    labels = torch.zeros(N).to(self.device).long()
+    return data, labels
+    
 
 def jig(img):
     transform_jigsaw = transforms.Compose([
