@@ -146,7 +146,7 @@ class GeneralizedRCNN(nn.Module):
             ssl_rot_losses = self.rot_heads(image, features_ssl, proposal, labels)
 
         if self.contrastive:
-            patches_1 = []
+            '''patches_1 = []
             patches_2 = []
             coord_1 = []
             coord_2 = []
@@ -169,6 +169,19 @@ class GeneralizedRCNN(nn.Module):
 
             features_ssl = [features_1, features_2]
 
+            image = None
+            proposal = None
+            ssl_con_losses = self.con_heads(image, features_ssl, proposal, labels)'''
+            patches_list = []
+            for x in batched_inputs[1]:
+                patch = x["con"].to(self.device)
+                patches_list.append(patch)
+            patches = torch.stack(patches_list, 0)
+            B, N, C, H, W = patches.size()
+            patches = patches.view(B * N, C, H, W)
+            labels = torch.zeros(N*B).to(self.device).long()
+            features_ssl = self.backbone(patches)
+            features_ssl = features_ssl["p6"]
             image = None
             proposal = None
             ssl_con_losses = self.con_heads(image, features_ssl, proposal, labels)
