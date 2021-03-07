@@ -17,7 +17,7 @@
 srun singularity exec --nv fs3c.sif python setup.py build develop --user || exit 1
 
 srun singularity exec --nv fs3c.sif python tools/train_net.py --num-gpus 2 --config-file configs/PascalVOC-detection/split1/faster_rcnn_R_101_FPN_base1.yaml
-srun singularity exec --nv fs3c.sif python tools/ckpt_surgery.py --src1 checkpoints/voc/faster_rcnn/faster_rcnn_R_101_FPN_base1/model_final.pth --method randinit --save-dir checkpoints/voc/faster_rcnn/faster_r$
+srun singularity exec --nv fs3c.sif python tools/ckpt_surgery.py --src1 checkpoints/voc/faster_rcnn/faster_rcnn_R_101_FPN_base1/model_final.pth --method randinit --save-dir checkpoints/voc/faster_rcnn/faster_rcnn_R_101_FPN_base1
 srun singularity exec --nv fs3c.sif python tools/train_net.py --num-gpus 2 --config-file configs/PascalVOC-detection/split1/faster_rcnn_R_101_FPN_ft_all1_10shot.yaml
 
 
