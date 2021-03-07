@@ -586,7 +586,7 @@ class ROTHeads(ROIHeads):
         return 0.1 * F.cross_entropy(x_, y_, reduction="mean")
 
 @ROI_HEADS_REGISTRY.register()
-class ConHeads(ROIHeads):
+'''class ConHeads(ROIHeads):
     """
     It's "standard" in a sense that there is no ROI transform sharing
     or feature sharing between tasks.
@@ -678,4 +678,79 @@ class ConHeads(ROIHeads):
         coord1, coord2 = targets[0], targets[1]
 
         loss = self.regression_loss(proj_1, proj_2, coord1, coord2) + self.regression_loss(proj_2, proj_1, coord2, coord1)
+        return 0.1 * loss'''
+class ConHeads(ROIHeads):
+    """
+    It's "standard" in a sense that there is no ROI transform sharing
+    or feature sharing between tasks.
+    The cropped rois go to separate branches directly.
+    This way, it is easier to make separate abstractions for different branches.
+
+    This class is used by most models, such as FPN and C5.
+    To implement more models, you can subclass it and implement a different
+    :meth:`forward()` or a head.
+    """
+
+    def __init__(self, cfg, input_shape):
+        # super(SSLHeads, self).__init__(cfg, input_shape)
+        super().__init__(cfg, input_shape)
+
+        self.similarity_f = nn.CosineSimilarity(dim=2)
+        self.criterion = nn.CrossEntropyLoss(reduction="sum")
+        self.temperature = 0.5
+        in_channels = self.feature_channels["p6"]
+        pooler_resolution = 4
+        num_fc = cfg.MODEL.ROI_BOX_HEAD.NUM_FC
+        fc_dim = 256
+        self._output_size = (in_channels, pooler_resolution, pooler_resolution)
+        self.fcs = []
+        for k in range(num_fc):
+            fc = nn.Linear(np.prod(self._output_size), fc_dim)
+            self.add_module("fc{}".format(k + 1), fc)
+            self.fcs.append(fc)
+            self._output_size = fc_dim
+        self.classifier_con = nn.Sequential()
+        self.classifier_con.add_module('fc_con', nn.Linear(256, 64))
+
+        for layer in self.fcs:
+            weight_init.c2_xavier_fill(layer)
+
+    def mask_correlated_samples(self, batch_size):
+        N = 2 * batch_size
+        mask = torch.ones((N, N), dtype=bool)
+        mask = mask.fill_diagonal_(0)
+        for i in range(batch_size):
+            mask[i, batch_size + i] = 0
+            mask[batch_size + i, i] = 0
+        return mask
+
+    def forward(self, images, features, proposals, targets=None):
+        if features.dim() > 2:
+            x_ = torch.flatten(features, start_dim=1)
+        else:
+            x_ = features
+        batch_size = x_.size(0) // 2
+        x_0 = x_[:batch_size]
+        x_1 = x_[batch_size:]
+
+        for layer in self.fcs:
+            x_0 = F.relu(layer(x_0))
+        x_0 = self.classifier_con(x_0)
+        for layer in self.fcs:
+            x_1 = F.relu(layer(x_1))
+        x_1 = self.classifier_con(x_1)
+
+        N = 2 * batch_size
+        z = torch.cat((x_0, x_1), dim=0)
+        sim = self.similarity_f(z.unsqueeze(1), z.unsqueeze(0)) / self.temperature
+        sim_i_j = torch.diag(sim, batch_size)
+        sim_j_i = torch.diag(sim, -batch_size)
+        positive_samples = torch.cat((sim_i_j, sim_j_i), dim=0).reshape(
+            N, 1
+        )
+        negative_samples = sim[self.mask_correlated_samples(batch_size)].reshape(N, -1)
+        logits = torch.cat((positive_samples, negative_samples), dim=1)
+        y_ = targets
+        loss = self.criterion(logits, y_)
+        loss /= N
         return 0.1 * loss
