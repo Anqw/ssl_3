@@ -85,8 +85,7 @@ def con(img):
         aug_img = normalizer(torch.as_tensor(img.transpose(2, 0, 1).astype("float32"))
         data_list.append(aug_img)
     data = torch.stack(data_list, 0)
-    labels = torch.zeros(N).to(self.device).long()
-    return data, labels
+    return data
     
 
 def jig(img):
